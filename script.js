@@ -1,43 +1,29 @@
-const teaspoon = document.getElementById('teaspoon')
-const tablespoon = document.getElementById('tablespoon')
-const cup = document.getElementById('cup')
-const milliliter = document.getElementById('milliliter')
-const liter = document.getElementById('liter')
-const pint = document.getElementById('pint')
-const quart = document.getElementById('quart')
-const gallon = document.getElementById('gallon')
-const fluidounce = document.getElementById('fluidounce')
+const input1 = document.getElementById('input1');
+
+const input2 = document.getElementById('input2');
 
 
 
-const emptyallfields = () => {
+function processinputs(input) {
 
-    teaspoon.value = tablespoon.value = cup.value = milliliter.value = liter.value = pint.value = quart.value = gallon.value = fluidounce.value = ""
+    const changedinput = event.target;
+
+        if (changedinput === input1) {
+
+            input2.value = input1.value.toUpperCase();
+
+        }
+
+        else if (changedinput === input2) {
+
+            input1.value = input2.value.toLowerCase();
+
+        }
 
 }
 
 
 
-milliliter.addEventListener('input', function () {
+input1.addEventListener('input', processinputs);
 
-    inputvalue = milliliter.value
-    if (inputvalue === "") {
-        emptyallfields()
-    } else {
-        liter.value = this.inputvalue / 1000
-    }
-
-})
-
-
-
-liter.addEventListener('input', function () {
-
-    inputvalue = liter.value
-    if (inputvalue === "") {
-        emptyallfields
-    } else {
-        milliliter.value = this.inputvalue * 1000
-    }
-
-})
+input2.addEventListener('input', processinputs);
