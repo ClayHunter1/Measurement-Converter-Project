@@ -1,5 +1,5 @@
-const teaspoon = document.getElementById('teaspoon')
-const tablespoon = document.getElementById('tablespoon')
+const teaspoon = document.getElementById('teaspoon-input')
+const tablespoon = document.getElementById('tablespoon-input')
 const cup = document.getElementById('cup')
 const milliliter = document.getElementById('milliliter')
 const liter = document.getElementById('liter')
@@ -41,3 +41,13 @@ liter.addEventListener('input', function () {
     }
 
 })
+
+
+
+console.log('teaspoon-input')
+
+console.log('tablespoon-input')
+
+console.log(teaspoon)
+
+console.log(tablespoon)
