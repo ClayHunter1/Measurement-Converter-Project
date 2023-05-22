@@ -4,21 +4,21 @@ const input2 = document.getElementById('input2');
 
 
 
-function processinputs(input) {
+function processinputs(event) {
 
     const changedinput = event.target;
 
-        if (changedinput === input1) {
+    if (changedinput === input1) {
 
-            input2.value = input1.value.toUpperCase();
+        input2.value = input1.value.toUpperCase();
 
-        }
+    }
 
-        else if (changedinput === input2) {
+    else if (changedinput === input2) {
 
-            input1.value = input2.value.toLowerCase();
+        input1.value = input2.value.toLowerCase();
 
-        }
+    }
 
 }
 
