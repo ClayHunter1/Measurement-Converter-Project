@@ -4,21 +4,31 @@ const input2 = document.getElementById('input2');
 
 
 
-function processinputs(event) {
+function getAllMeasurements(numberOfGrams) {
+    
+    return {
+      
+        teaspoon: numberOfGrams / 4.2,
+      
+        tablespoon: numberOfGrams / 14.3,
+      
+        cup: numberOfGrams / 227,
+      
+        ounce: numberOfGrams / 28.3,
+      
+        pound: numberOfGrams / 454,
+    
+    };
 
-    const changedinput = event.target;
+}
 
-    if (changedinput === input1) {
 
-        input2.value = input1.value.toUpperCase();
 
-    }
+function processinputs(input) {
 
-    else if (changedinput === input2) {
+    const numberOfGrams = 100;
 
-        input1.value = input2.value.toLowerCase();
-
-    }
+    const calculatedMeasurements = getAllMeasurements(numberOfGrams);
 
 }
 
