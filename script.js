@@ -24,7 +24,7 @@ function getAllMeasurements(numberOfGrams) {
 
 
 
-function processinputs(input) {
+function processInputs(input) {
 
     const numberOfGrams = 100;
 
@@ -34,6 +34,6 @@ function processinputs(input) {
 
 
 
-input1.addEventListener('input', processinputs);
+input1.addEventListener('input', processInputs);
 
-input2.addEventListener('input', processinputs);
+input2.addEventListener('input', processInputs);
