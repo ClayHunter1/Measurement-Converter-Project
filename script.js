@@ -7,17 +7,13 @@ const input2 = document.getElementById('input2');
 function getAllMeasurements(numberOfGrams) {
     
     return {
-      
-        teaspoon: numberOfGrams / 4.2,
-      
-        tablespoon: numberOfGrams / 14.3,
-      
-        cup: numberOfGrams / 227,
-      
+
         ounce: numberOfGrams / 28.3,
       
         pound: numberOfGrams / 454,
-    
+
+        kilogram: numberOfGrams / 1000,
+
     };
 
 }
@@ -29,6 +25,34 @@ function processInputs(input) {
     const numberOfGrams = 100;
 
     const calculatedMeasurements = getAllMeasurements(numberOfGrams);
+
+}
+
+
+
+function convertUnitToGrams(amount, unitType) {
+
+    switch (unitType) {
+
+        case ounce:
+
+            amount * 28.3;
+
+        break;
+
+        case pound:
+
+            amount * 454;
+
+        break;
+
+        case kilogram:
+
+            amount * 1000;
+
+        break;
+
+    }
 
 }
 
