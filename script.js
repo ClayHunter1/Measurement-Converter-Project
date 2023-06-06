@@ -1,6 +1,10 @@
-const input1 = document.getElementById('input1');
+const gramInput = document.getElementById('gram')
 
-const input2 = document.getElementById('input2');
+const kilogramInput = document.getElementById('kilogram')
+
+const poundInput = document.getElementById('pound')
+
+const ounceInput = document.getElementById('ounce')
 
 
 
@@ -21,8 +25,6 @@ function getAllMeasurements(numberOfGrams) {
 
 
 function processInputs(input) {
-
-    const numberOfGrams = 100;
 
     const calculatedMeasurements = getAllMeasurements(numberOfGrams);
 
@@ -58,6 +60,12 @@ function convertUnitToGrams(amount, unitType) {
 
 
 
-input1.addEventListener('input', processInputs);
+kilogramInput.addEventListener('input', convertUnitToGrams, processInputs); {
 
-input2.addEventListener('input', processInputs);
+    ounceInput = calculatedMeasurements[0];
+
+    poundInput = calculatedMeasurements[1];
+
+    gramInput = numberOfGrams;
+
+}
