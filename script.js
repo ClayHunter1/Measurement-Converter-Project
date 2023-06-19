@@ -6,9 +6,55 @@ const poundInput = document.getElementById('pound')
 
 const ounceInput = document.getElementById('ounce')
 
+const teaspoonInput = document.getElementById('teaspoon')
+
+const tablespoonInput = document.getElementById('tablespoon')
+
+const cupInput = document.getElementById('cup')
+
+const milliliterInput = document.getElementById('milliliter')
+
+const literInput = document.getElementById('liter')
+
+const pintInput = document.getElementById('pint')
+
+const quartInput = document.getElementById('quart')
+
+const gallonInput = document.getElementById('gallon')
+
+const fluidounceInput = document.getElementById('fluidounce')
 
 
-function getAllMeasurements(numberOfGrams) {
+
+function getAllVolumeMeasurements(numberOfCups) {
+
+    return {
+
+        teaspoon: numberOfCups / 48,
+
+        tablespoon: numberOfCups / 16,
+
+        milliliter: numberOfCups / 236.6,
+
+        liter: numberOfCups * 4.227,
+
+        pint: numberOfCups * 2.402,
+
+        quart: numberOfCups * 4.804,
+
+        gallon: numberOfCups * 19.215,
+
+        fluidounce: numberOfCups / 8,
+
+        cup: numberOfCups,
+
+    };
+
+}
+
+
+
+function getAllWeightMeasurements(numberOfGrams) {
     
     return {
 
@@ -18,15 +64,37 @@ function getAllMeasurements(numberOfGrams) {
 
         kilogram: numberOfGrams / 1000,
 
+        gram: numberOfGrams,
+
     };
 
 }
 
 
 
-function processInputs(input) {
+function convertUnitToCups(amount, unitType) {
 
-    const calculatedMeasurements = getAllMeasurements(numberOfGrams);
+    switch (unitType) {
+
+        case 'teaspoon': return amount * 48;
+
+        case 'tablespoon': return amount * 16;
+
+        case 'milliliter': return amount * 236.6;
+
+        case 'liter': return amount / 4.227;
+
+        case 'pint': return amount / 2.402;
+
+        case 'quart': return amount / 4.804;
+
+        case 'gallon': return amount / 19.215;
+
+        case 'fluidounce': return amount * 8;
+
+        case 'cup': return amount;
+
+    }
 
 }
 
@@ -36,23 +104,13 @@ function convertUnitToGrams(amount, unitType) {
 
     switch (unitType) {
 
-        case ounce:
+        case 'ounce': return amount * 28.3;
 
-            amount * 28.3;
+        case 'pound': return amount * 454;
 
-        break;
+        case 'kilogram': return amount * 1000;
 
-        case pound:
-
-            amount * 454;
-
-        break;
-
-        case kilogram:
-
-            amount * 1000;
-
-        break;
+        case 'gram': return amount;
 
     }
 
@@ -60,12 +118,94 @@ function convertUnitToGrams(amount, unitType) {
 
 
 
-kilogramInput.addEventListener('input', convertUnitToGrams, processInputs); {
+function convertVolumeUnitsEventHandler(event) {
 
-    ounceInput = calculatedMeasurements[0];
+    console.log(event)
 
-    poundInput = calculatedMeasurements[1];
+    const unitType = event.target.id
 
-    gramInput = numberOfGrams;
+    const unitValue = Number(event.target.value)
+
+    console.log(typeof unitValue)
+
+    const numberOfCups = convertUnitToCups(unitValue, unitType)
+
+    const allMeasurements = getAllVolumeMeasurements(numberOfCups)
+
+    cupInput.value = allMeasurements.cup
+
+    teaspoonInput.value = allMeasurements.teaspoon
+
+    tablespoonInput.value = allMeasurements.tablespoon
+
+    milliliterInput.value = allMeasurements.milliliter
+
+    literInput.value = allMeasurements.liter
+
+    pintInput.value = allMeasurements.pint
+
+    quartInput.value = allMeasurements.quart
+
+    gallonInput.value = allMeasurements.gallon
+
+    fluidounceInput.value = allMeasurements.fluidounce
 
 }
+
+
+
+function convertWeightUnitsEventHandler(event) {
+
+    console.log(event)
+
+    const unitType = event.target.id
+
+    const unitValue = Number(event.target.value)
+
+    console.log (unitType, unitValue)
+
+    console.log(typeof unitValue)
+
+    const numberOfGrams = convertUnitToGrams(unitValue, unitType)
+
+    console.log(numberOfGrams)
+
+    const allMeasurements = getAllWeightMeasurements(numberOfGrams)
+
+    gramInput.value = allMeasurements.gram
+
+    kilogramInput.value = allMeasurements.kilogram
+
+    ounceInput.value = allMeasurements.ounce
+
+    poundInput.value = allMeasurements.pound
+    
+}
+
+
+
+gramInput.addEventListener('input',convertWeightUnitsEventHandler)
+
+kilogramInput.addEventListener('input',convertWeightUnitsEventHandler)
+
+ounceInput.addEventListener('input',convertWeightUnitsEventHandler)
+
+poundInput.addEventListener('input',convertWeightUnitsEventHandler)
+
+cupInput.addEventListener('input',convertVolumeUnitsEventHandler)
+
+teaspoonInput.addEventListener('input',convertVolumeUnitsEventHandler)
+
+tablespoonInput.addEventListener('input',convertVolumeUnitsEventHandler)
+
+milliliterInput.addEventListener('input',convertVolumeUnitsEventHandler)
+
+literInput.addEventListener('input',convertVolumeUnitsEventHandler)
+
+pintInput.addEventListener('input',convertVolumeUnitsEventHandler)
+
+quartInput.addEventListener('input',convertVolumeUnitsEventHandler)
+
+gallonInput.addEventListener('input',convertVolumeUnitsEventHandler)
+
+fluidounceInput.addEventListener('input',convertVolumeUnitsEventHandler)
