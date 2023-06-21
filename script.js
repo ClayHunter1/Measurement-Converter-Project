@@ -132,23 +132,49 @@ function convertVolumeUnitsEventHandler(event) {
 
     const allMeasurements = getAllVolumeMeasurements(numberOfCups)
 
-    cupInput.value = allMeasurements.cup
+    if (unitValue === 0) {
 
-    teaspoonInput.value = allMeasurements.teaspoon
+        cupInput.value = ''
 
-    tablespoonInput.value = allMeasurements.tablespoon
+        teaspoonInput.value = ''
 
-    milliliterInput.value = allMeasurements.milliliter
+        tablespoonInput.value = ''
 
-    literInput.value = allMeasurements.liter
+        milliliterInput.value = ''
 
-    pintInput.value = allMeasurements.pint
+        literInput.value = ''
 
-    quartInput.value = allMeasurements.quart
+        pintInput.value = ''
 
-    gallonInput.value = allMeasurements.gallon
+        quartInput.value = ''
 
-    fluidounceInput.value = allMeasurements.fluidounce
+        gallonInput.value = ''
+
+        fluidounceInput.value = ''
+
+    }
+
+    else {
+
+        cupInput.value = allMeasurements.cup
+
+        teaspoonInput.value = allMeasurements.teaspoon
+
+        tablespoonInput.value = allMeasurements.tablespoon
+
+        milliliterInput.value = allMeasurements.milliliter
+
+        literInput.value = allMeasurements.liter
+
+        pintInput.value = allMeasurements.pint
+
+        quartInput.value = allMeasurements.quart
+
+        gallonInput.value = allMeasurements.gallon
+
+        fluidounceInput.value = allMeasurements.fluidounce
+
+    }
 
 }
 
@@ -172,14 +198,30 @@ function convertWeightUnitsEventHandler(event) {
 
     const allMeasurements = getAllWeightMeasurements(numberOfGrams)
 
-    gramInput.value = allMeasurements.gram
+    if (unitValue === 0) {
 
-    kilogramInput.value = allMeasurements.kilogram
+        gramInput.value = ''
 
-    ounceInput.value = allMeasurements.ounce
+        kilogramInput.value = ''
 
-    poundInput.value = allMeasurements.pound
-    
+        ounceInput.value = ''
+
+        poundInput.value = ''
+
+    }
+
+    else {
+
+        gramInput.value = allMeasurements.gram
+
+        kilogramInput.value = allMeasurements.kilogram
+
+        ounceInput.value = allMeasurements.ounce
+
+        poundInput.value = allMeasurements.pound
+
+    }
+
 }
 
 
