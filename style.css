@@ -4,13 +4,9 @@ body {
 	font-family: Arial, Verdana, Tahoma;
 }
 
-
-
 h1 {
     color: #ffffff;
 }
-
-
 
 #volume {
     background-color: #ffffff;
@@ -23,8 +19,6 @@ h1 {
     box-shadow: 5px 5px 15px rgba(0,0,0,.3);
 }
 
-
-
 #weight {
     background-color: #ffffff;
     color: #000000;
@@ -35,8 +29,6 @@ h1 {
     padding: 5px;
     box-shadow: 5px 5px 15px rgba(0,0,0,.3);
 }
-
-
 
 .center {
     margin-left: auto;
