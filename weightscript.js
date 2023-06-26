@@ -30,6 +30,12 @@ function convertWeightUnitsEventHandler(event) {
     const numberOfGrams = convertUnitToGrams(unitValue, unitType)
     console.log(numberOfGrams)
     const allMeasurements = getAllWeightMeasurements(numberOfGrams)
+
+    roundedGrams = allMeasurements.gram.toFixed(2);
+    roundedKilograms = allMeasurements.kilogram.toFixed(2);
+    roundedOunces = allMeasurements.ounce.toFixed(2);
+    roundedPounds = allMeasurements.pound.toFixed(2);
+
     if (unitValue === 0) {
         gramInput.value = ''
         kilogramInput.value = ''
@@ -37,10 +43,10 @@ function convertWeightUnitsEventHandler(event) {
         poundInput.value = ''
     }
     else {
-        gramInput.value = allMeasurements.gram
-        kilogramInput.value = allMeasurements.kilogram
-        ounceInput.value = allMeasurements.ounce
-        poundInput.value = allMeasurements.pound
+        gramInput.value = roundedGrams
+        kilogramInput.value = roundedKilograms
+        ounceInput.value = roundedOunces
+        poundInput.value = roundedPounds
     }
 }
 
