@@ -37,10 +37,8 @@ function convertUnitToCups(amount, unitType) {
 }
 
 function convertVolumeUnitsEventHandler(event) {
-    console.log(event)
     const unitType = event.target.id
     const unitValue = Number(event.target.value)
-    console.log(typeof unitValue)
     const numberOfCups = convertUnitToCups(unitValue, unitType)
     const allMeasurements = getAllVolumeMeasurements(numberOfCups)
     if (unitValue === 0) {
