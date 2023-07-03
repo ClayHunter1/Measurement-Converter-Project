@@ -21,20 +21,34 @@ function convertUnitToGrams(amount, unitType) {
     }
 }
 
+function decimalPlaces(number) {
+    return ((+number).toFixed(20)).replace(/^-?\d*\.?|0+$/g, '').length;
+}
+
+const formatNumberForDisplay = (originalValue) => {
+    if (Number.isNaN(originalValue)) {
+        return ""
+    }
+    if (originalValue === 0) {
+        return ""
+    }
+    else if (decimalPlaces(originalValue) <= 2) {
+        return originalValue
+    }
+    else {
+        return originalValue.toFixed(2);
+    }
+}
+
 function convertWeightUnitsEventHandler(event) {
-    console.log(event)
     const unitType = event.target.id
     const unitValue = Number(event.target.value)
-    console.log (unitType, unitValue)
-    console.log(typeof unitValue)
     const numberOfGrams = convertUnitToGrams(unitValue, unitType)
-    console.log(numberOfGrams)
     const allMeasurements = getAllWeightMeasurements(numberOfGrams)
-
-    roundedGrams = allMeasurements.gram.toFixed(2);
-    roundedKilograms = allMeasurements.kilogram.toFixed(2);
-    roundedOunces = allMeasurements.ounce.toFixed(2);
-    roundedPounds = allMeasurements.pound.toFixed(2);
+    const formattedGram = formatNumberForDisplay(allMeasurements.gram)
+    const formattedKilogram = formatNumberForDisplay(allMeasurements.kilogram)
+    const formattedOunce = formatNumberForDisplay(allMeasurements.ounce)
+    const formattedPound = formatNumberForDisplay(allMeasurements.pound)
 
     if (unitValue === 0) {
         gramInput.value = ''
@@ -43,10 +57,10 @@ function convertWeightUnitsEventHandler(event) {
         poundInput.value = ''
     }
     else {
-        gramInput.value = roundedGrams
-        kilogramInput.value = roundedKilograms
-        ounceInput.value = roundedOunces
-        poundInput.value = roundedPounds
+        gramInput.value = formattedGram
+        kilogramInput.value = formattedKilogram
+        ounceInput.value = formattedOunce
+        poundInput.value = formattedPound
     }
 }
 

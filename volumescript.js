@@ -36,11 +36,40 @@ function convertUnitToCups(amount, unitType) {
     }
 }
 
+function decimalPlaces(number) {
+    return ((+number).toFixed(20)).replace(/^-?\d*\.?|0+$/g, '').length;
+}
+
+const formatNumberForDisplay = (originalValue) => {
+    if (Number.isNaN(originalValue)) {
+        return ""
+    }
+    if (originalValue === 0) {
+        return ""
+    }
+    else if (decimalPlaces(originalValue) <= 2) {
+        return originalValue
+    }
+    else {
+        return originalValue.toFixed(2);
+    }
+}
+
 function convertVolumeUnitsEventHandler(event) {
     const unitType = event.target.id
     const unitValue = Number(event.target.value)
     const numberOfCups = convertUnitToCups(unitValue, unitType)
     const allMeasurements = getAllVolumeMeasurements(numberOfCups)
+    const formattedCup = formatNumberForDisplay(allMeasurements.cup)
+    const formattedTeaspoon = formatNumberForDisplay(allMeasurements.teaspoon)
+    const formattedTablespoon = formatNumberForDisplay(allMeasurements.tablespoon)
+    const formattedMilliliter = formatNumberForDisplay(allMeasurements.milliliter)
+    const formattedLiter = formatNumberForDisplay(allMeasurements.liter)
+    const formattedPint = formatNumberForDisplay(allMeasurements.pint)
+    const formattedQuart = formatNumberForDisplay(allMeasurements.quart)
+    const formattedGallon = formatNumberForDisplay(allMeasurements.gallon)
+    const formattedFluidounce = formatNumberForDisplay(allMeasurements.fluidounce)
+
     if (unitValue === 0) {
         cupInput.value = ''
         teaspoonInput.value = ''
@@ -53,15 +82,15 @@ function convertVolumeUnitsEventHandler(event) {
         fluidounceInput.value = ''
     }
     else {
-        cupInput.value = allMeasurements.cup
-        teaspoonInput.value = allMeasurements.teaspoon
-        tablespoonInput.value = allMeasurements.tablespoon
-        milliliterInput.value = allMeasurements.milliliter
-        literInput.value = allMeasurements.liter
-        pintInput.value = allMeasurements.pint
-        quartInput.value = allMeasurements.quart
-        gallonInput.value = allMeasurements.gallon
-        fluidounceInput.value = allMeasurements.fluidounce
+        cupInput.value = formattedCup
+        teaspoonInput.value = formattedTeaspoon
+        tablespoonInput.value = formattedTablespoon
+        milliliterInput.value = formattedMilliliter
+        literInput.value = formattedLiter
+        pintInput.value = formattedPint
+        quartInput.value = formattedQuart
+        gallonInput.value = formattedGallon
+        fluidounceInput.value = formattedFluidounce
     }
 }
 
