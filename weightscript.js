@@ -21,15 +21,21 @@ function convertUnitToGrams(amount, unitType) {
     }
 }
 
+// https://stackoverflow.com/a/17369245
 function decimalPlaces(number) {
-    return ((+number).toFixed(20)).replace(/^-?\d*\.?|0+$/g, '').length;
+    if (Math.floor(number) === number) return 0;
+  
+    const str = number.toString();
+    if (str.indexOf('.') !== -1 && str.indexOf('-') !== -1) {
+      return str.split('-')[1] || 0;
+    } else if (str.indexOf('.') !== -1) {
+      return str.split('.')[1].length || 0;
+    }
+    return str.split('-')[1] || 0;
 }
 
 const formatNumberForDisplay = (originalValue) => {
-    if (Number.isNaN(originalValue)) {
-        return ""
-    }
-    if (originalValue === 0) {
+    if (Number.isNaN(originalValue) || originalValue === 0) {
         return ""
     }
     else if (decimalPlaces(originalValue) <= 2) {
@@ -45,6 +51,7 @@ function convertWeightUnitsEventHandler(event) {
     const unitValue = Number(event.target.value)
     const numberOfGrams = convertUnitToGrams(unitValue, unitType)
     const allMeasurements = getAllWeightMeasurements(numberOfGrams)
+
     const formattedGram = formatNumberForDisplay(allMeasurements.gram)
     const formattedKilogram = formatNumberForDisplay(allMeasurements.kilogram)
     const formattedOunce = formatNumberForDisplay(allMeasurements.ounce)

@@ -10,41 +10,47 @@ const fluidounceInput = document.getElementById('fluidounce')
 
 function getAllVolumeMeasurements(numberOfCups) {
     return {
-        teaspoon: numberOfCups / 48,
-        tablespoon: numberOfCups / 16,
-        milliliter: numberOfCups / 236.6,
-        liter: numberOfCups * 4.227,
-        pint: numberOfCups * 2.402,
-        quart: numberOfCups * 4.804,
-        gallon: numberOfCups * 19.215,
-        fluidounce: numberOfCups / 8,
+        teaspoon: numberOfCups * 48,
+        tablespoon: numberOfCups * 16,
+        milliliter: numberOfCups * 236.6,
+        liter: numberOfCups / 4.227,
+        pint: numberOfCups / 2.402,
+        quart: numberOfCups / 4.804,
+        gallon: numberOfCups / 19.215,
+        fluidounce: numberOfCups * 8,
         cup: numberOfCups,
     };
 }
 
 function convertUnitToCups(amount, unitType) {
     switch (unitType) {
-        case 'teaspoon': return amount * 48;
-        case 'tablespoon': return amount * 16;
-        case 'milliliter': return amount * 236.6;
-        case 'liter': return amount / 4.227;
-        case 'pint': return amount / 2.402;
-        case 'quart': return amount / 4.804;
-        case 'gallon': return amount / 19.215;
-        case 'fluidounce': return amount * 8;
+        case 'teaspoon': return amount / 48;
+        case 'tablespoon': return amount / 16;
+        case 'milliliter': return amount / 236.6;
+        case 'liter': return amount * 4.227;
+        case 'pint': return amount * 2.402;
+        case 'quart': return amount * 4.804;
+        case 'gallon': return amount * 19.215;
+        case 'fluidounce': return amount / 8;
         case 'cup': return amount;
     }
 }
 
+// https://stackoverflow.com/a/17369245
 function decimalPlaces(number) {
-    return ((+number).toFixed(20)).replace(/^-?\d*\.?|0+$/g, '').length;
+    if (Math.floor(number) === number) return 0;
+  
+    const str = number.toString();
+    if (str.indexOf('.') !== -1 && str.indexOf('-') !== -1) {
+      return str.split('-')[1] || 0;
+    } else if (str.indexOf('.') !== -1) {
+      return str.split('.')[1].length || 0;
+    }
+    return str.split('-')[1] || 0;
 }
 
 const formatNumberForDisplay = (originalValue) => {
-    if (Number.isNaN(originalValue)) {
-        return ""
-    }
-    if (originalValue === 0) {
+    if (Number.isNaN(originalValue) || originalValue === 0) {
         return ""
     }
     else if (decimalPlaces(originalValue) <= 2) {
@@ -60,6 +66,7 @@ function convertVolumeUnitsEventHandler(event) {
     const unitValue = Number(event.target.value)
     const numberOfCups = convertUnitToCups(unitValue, unitType)
     const allMeasurements = getAllVolumeMeasurements(numberOfCups)
+
     const formattedCup = formatNumberForDisplay(allMeasurements.cup)
     const formattedTeaspoon = formatNumberForDisplay(allMeasurements.teaspoon)
     const formattedTablespoon = formatNumberForDisplay(allMeasurements.tablespoon)
