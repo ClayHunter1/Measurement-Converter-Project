@@ -34,7 +34,7 @@ function decimalPlaces(number) {
     return str.split('-')[1] || 0;
 }
 
-const formatNumberForDisplay = (originalValue) => {
+const formatWeightNumberForDisplay = (originalValue) => {
     if (Number.isNaN(originalValue) || originalValue === 0) {
         return ""
     }
@@ -52,10 +52,10 @@ function convertWeightUnitsEventHandler(event) {
     const numberOfGrams = convertUnitToGrams(unitValue, unitType)
     const allMeasurements = getAllWeightMeasurements(numberOfGrams)
 
-    const formattedGram = formatNumberForDisplay(allMeasurements.gram)
-    const formattedKilogram = formatNumberForDisplay(allMeasurements.kilogram)
-    const formattedOunce = formatNumberForDisplay(allMeasurements.ounce)
-    const formattedPound = formatNumberForDisplay(allMeasurements.pound)
+    const formattedGram = formatWeightNumberForDisplay(allMeasurements.gram)
+    const formattedKilogram = formatWeightNumberForDisplay(allMeasurements.kilogram)
+    const formattedOunce = formatWeightNumberForDisplay(allMeasurements.ounce)
+    const formattedPound = formatWeightNumberForDisplay(allMeasurements.pound)
 
     if (unitValue === 0) {
         gramInput.value = ''

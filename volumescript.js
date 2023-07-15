@@ -49,7 +49,7 @@ function decimalPlaces(number) {
     return str.split('-')[1] || 0;
 }
 
-const formatNumberForDisplay = (originalValue) => {
+const formatVolumeNumberForDisplay = (originalValue) => {
     if (Number.isNaN(originalValue) || originalValue === 0) {
         return ""
     }
@@ -67,15 +67,15 @@ function convertVolumeUnitsEventHandler(event) {
     const numberOfCups = convertUnitToCups(unitValue, unitType)
     const allMeasurements = getAllVolumeMeasurements(numberOfCups)
 
-    const formattedCup = formatNumberForDisplay(allMeasurements.cup)
-    const formattedTeaspoon = formatNumberForDisplay(allMeasurements.teaspoon)
-    const formattedTablespoon = formatNumberForDisplay(allMeasurements.tablespoon)
-    const formattedMilliliter = formatNumberForDisplay(allMeasurements.milliliter)
-    const formattedLiter = formatNumberForDisplay(allMeasurements.liter)
-    const formattedPint = formatNumberForDisplay(allMeasurements.pint)
-    const formattedQuart = formatNumberForDisplay(allMeasurements.quart)
-    const formattedGallon = formatNumberForDisplay(allMeasurements.gallon)
-    const formattedFluidounce = formatNumberForDisplay(allMeasurements.fluidounce)
+    const formattedCup = formatVolumeNumberForDisplay(allMeasurements.cup)
+    const formattedTeaspoon = formatVolumeNumberForDisplay(allMeasurements.teaspoon)
+    const formattedTablespoon = formatVolumeNumberForDisplay(allMeasurements.tablespoon)
+    const formattedMilliliter = formatVolumeNumberForDisplay(allMeasurements.milliliter)
+    const formattedLiter = formatVolumeNumberForDisplay(allMeasurements.liter)
+    const formattedPint = formatVolumeNumberForDisplay(allMeasurements.pint)
+    const formattedQuart = formatVolumeNumberForDisplay(allMeasurements.quart)
+    const formattedGallon = formatVolumeNumberForDisplay(allMeasurements.gallon)
+    const formattedFluidounce = formatVolumeNumberForDisplay(allMeasurements.fluidounce)
 
     if (unitValue === 0) {
         cupInput.value = ''
