@@ -61,43 +61,69 @@ const formatVolumeNumberForDisplay = (originalValue) => {
     }
 }
 
-function convertVolumeUnitsEventHandler(event) {
-    const unitType = event.target.id
-    const unitValue = Number(event.target.value)
-    const numberOfCups = convertUnitToCups(unitValue, unitType)
-    const allMeasurements = getAllVolumeMeasurements(numberOfCups)
+const clearAllVolumeInputs = () => {
+    cupInput.value = '';
+    teaspoonInput.value = '';
+    tablespoonInput.value = '';
+    milliliterInput.value = '';
+    literInput.value = '';
+    pintInput.value = '';
+    quartInput.value = '';
+    gallonInput.value = '';
+    fluidounceInput.value = '';
+};
 
-    const formattedCup = formatVolumeNumberForDisplay(allMeasurements.cup)
-    const formattedTeaspoon = formatVolumeNumberForDisplay(allMeasurements.teaspoon)
-    const formattedTablespoon = formatVolumeNumberForDisplay(allMeasurements.tablespoon)
-    const formattedMilliliter = formatVolumeNumberForDisplay(allMeasurements.milliliter)
-    const formattedLiter = formatVolumeNumberForDisplay(allMeasurements.liter)
-    const formattedPint = formatVolumeNumberForDisplay(allMeasurements.pint)
-    const formattedQuart = formatVolumeNumberForDisplay(allMeasurements.quart)
-    const formattedGallon = formatVolumeNumberForDisplay(allMeasurements.gallon)
-    const formattedFluidounce = formatVolumeNumberForDisplay(allMeasurements.fluidounce)
+const calculateAndSetFormattedVolumeValues = (numberOfCups) => {
+    const allMeasurements = getAllVolumeMeasurements(numberOfCups);
 
-    if (unitValue === 0) {
-        cupInput.value = ''
-        teaspoonInput.value = ''
-        tablespoonInput.value = ''
-        milliliterInput.value = ''
-        literInput.value = ''
-        pintInput.value = ''
-        quartInput.value = ''
-        gallonInput.value = ''
-        fluidounceInput.value = ''
+    const formattedCup = formatVolumeNumberForDisplay(allMeasurements.cup);
+    const formattedTeaspoon = formatVolumeNumberForDisplay(allMeasurements.teaspoon);
+    const formattedTablespoon = formatVolumeNumberForDisplay(allMeasurements.tablespoon);
+    const formattedMilliliter = formatVolumeNumberForDisplay(allMeasurements.milliliter);
+    const formattedLiter = formatVolumeNumberForDisplay(allMeasurements.liter);
+    const formattedPint = formatVolumeNumberForDisplay(allMeasurements.pint);
+    const formattedQuart = formatVolumeNumberForDisplay(allMeasurements.quart);
+    const formattedGallon = formatVolumeNumberForDisplay(allMeasurements.gallon);
+    const formattedFluidounce = formatVolumeNumberForDisplay(allMeasurements.fluidounce);
+
+    cupInput.value = formattedCup;
+    teaspoonInput.value = formattedTeaspoon;
+    tablespoonInput.value = formattedTablespoon;
+    milliliterInput.value = formattedMilliliter;
+    literInput.value = formattedLiter;
+    pintInput.value = formattedPint;
+    quartInput.value = formattedQuart;
+    gallonInput.value = formattedGallon;
+    fluidounceInput.value = formattedFluidounce;
+};
+
+const isVolumeInputValidForCalculation = (inputValue) => {
+    if (
+      inputValue.slice(-1) === '.' ||
+      Number.isNaN(inputValue) ||
+      inputValue == 0
+    ) {
+      return false;
     }
-    else {
-        cupInput.value = formattedCup
-        teaspoonInput.value = formattedTeaspoon
-        tablespoonInput.value = formattedTablespoon
-        milliliterInput.value = formattedMilliliter
-        literInput.value = formattedLiter
-        pintInput.value = formattedPint
-        quartInput.value = formattedQuart
-        gallonInput.value = formattedGallon
-        fluidounceInput.value = formattedFluidounce
+    return true;
+};
+
+function convertVolumeUnitsEventHandler(event) {
+    const unitType = event.target.id;
+    const unitValue =
+    typeof event.target.value === 'number'
+    ? event.target.value.toString()
+    : event.target.value;
+
+    const shouldCalculateValues = isVolumeInputValidForCalculation(unitValue);
+
+    if (!shouldCalculateValues) {
+        clearAllVolumeInputs();
+        document.getElementById(event.target.id).value = unitValue;
+    } else {
+        const numberOfCups = convertUnitToCups(unitValue, unitType);
+        calculateAndSetFormattedVolumeValues(numberOfCups);
+        document.getElementById(event.target.id).value = unitValue;
     }
 }
 

@@ -46,28 +46,54 @@ const formatWeightNumberForDisplay = (originalValue) => {
     }
 }
 
-function convertWeightUnitsEventHandler(event) {
-    const unitType = event.target.id
-    const unitValue = Number(event.target.value)
-    const numberOfGrams = convertUnitToGrams(unitValue, unitType)
-    const allMeasurements = getAllWeightMeasurements(numberOfGrams)
+const clearAllWeightInputs = () => {
+    gramInput.value = '';
+    kilogramInput.value = '';
+    ounceInput.value = '';
+    poundInput.value = '';
+};
+
+const calculateAndSetFormattedWeightValues = (numberOfGrams) => {
+    const allMeasurements = getAllWeightMeasurements(numberOfGrams);
 
     const formattedGram = formatWeightNumberForDisplay(allMeasurements.gram)
     const formattedKilogram = formatWeightNumberForDisplay(allMeasurements.kilogram)
     const formattedOunce = formatWeightNumberForDisplay(allMeasurements.ounce)
     const formattedPound = formatWeightNumberForDisplay(allMeasurements.pound)
 
-    if (unitValue === 0) {
-        gramInput.value = ''
-        kilogramInput.value = ''
-        ounceInput.value = ''
-        poundInput.value = ''
+    gramInput.value = formattedGram;
+    kilogramInput.value = formattedKilogram;
+    ounceInput.value = formattedOunce;
+    poundInput.value = formattedPound;
+};
+
+const isWeightInputValidForCalculation = (inputValue) => {
+    if (
+      inputValue.slice(-1) === '.' ||
+      Number.isNaN(inputValue) ||
+      inputValue == 0
+    ) {
+      return false;
     }
-    else {
-        gramInput.value = formattedGram
-        kilogramInput.value = formattedKilogram
-        ounceInput.value = formattedOunce
-        poundInput.value = formattedPound
+    return true;
+};
+
+function convertWeightUnitsEventHandler(event) {
+    const unitType = event.target.id;
+    const unitValue =
+    typeof event.target.value === 'number'
+    ? event.target.value.toString()
+    : event.target.value;
+
+    const shouldCalculateValues = isWeightInputValidForCalculation(unitValue);
+
+    if (!shouldCalculateValues) {
+        clearAllWeightInputs();
+        document.getElementById(event.target.id).value = unitValue;
+    } else {
+        const numberOfGrams = convertUnitToGrams(unitValue, unitType);
+        calculateAndSetFormattedWeightValues(numberOfGrams);
+        document.getElementById(event.target.id).value = unitValue;
     }
 }
 
